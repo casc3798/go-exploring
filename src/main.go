@@ -7,6 +7,7 @@ import (
 	"os"
 
 	"github.com/casc3798/go-exploring/src/api/users"
+	"github.com/casc3798/go-exploring/src/config/database"
 	"github.com/go-chi/chi/middleware"
 	"github.com/go-chi/chi/v5"
 	"github.com/joho/godotenv"
@@ -17,6 +18,12 @@ func main() {
 	if err != nil {
 		fmt.Println("Error loading .env file:", err)
 	}
+
+	db, err := database.NewDB()
+	if err != nil {
+		fmt.Println("Error connecting to database:", err)
+	}
+	defer db.Close()
 
 	router := chi.NewRouter()
 	router.Use(middleware.Logger)

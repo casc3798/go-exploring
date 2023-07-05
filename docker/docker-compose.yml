@@ -12,3 +12,4 @@ services:
       POSTGRES_DB: taily
     volumes:
       - ./data:/var/lib/postgresql/data
+      - ./init:/docker-entrypoint-initdb.d
